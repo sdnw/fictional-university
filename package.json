@@ -1,0 +1,23 @@
+{
+  "name": "fictional-university-theme",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sdnw/fictional-university.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sdnw/fictional-university/issues"
+  },
+  "homepage": "https://github.com/sdnw/fictional-university#readme",
+  "devDependencies": {
+    "@prettier/plugin-php": "^0.19.3",
+    "prettier": "^2.8.4"
+  }
+}
