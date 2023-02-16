@@ -1,6 +1,0 @@
-<?php
-    $myName = "Steven";
-
-?>
-
-<p>

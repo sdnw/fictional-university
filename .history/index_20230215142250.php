@@ -1,1 +1,0 @@
-This is our really amazing custom theme.
