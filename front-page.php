@@ -16,7 +16,7 @@
       <div class="full-width-split__one">
         <div class="full-width-split__inner">
           <h2 class="headline headline--small-plus t-center">Upcoming Events</h2>
-
+          <!-- this is the code that will be used to display the events -->
           <?php
             $homePageEvents = new WP_Query(array(
               'posts_per_page' => 2,
@@ -32,14 +32,18 @@
             </a>
             <div class="event-summary__content">
               <h5 class="event-summary__title headline headline--tiny"><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h5>
-              <p> <?php echo wp_trim_words(get_the_content(), 18) ?> <a href="<?php the_permalink() ?>" class="nu gray">Learn more</a></p>
+              <p> <?php if(has_excerpt()) {
+                echo get_the_excerpt();
+              } else {
+                echo wp_trim_words(get_the_content(), 18);
+              } ?> <a href="<?php the_permalink() ?>" class="nu gray">Learn more</a></p>
             </div>
           </div>
             <?php } 
             wp_reset_postdata();
           ?>
 
-          <p class="t-center no-margin"><a href="<?php echo site_url('/events') ?>" class="btn btn--blue">View All Events</a></p>
+          <p class="t-center no-margin"><a href="<?php echo get_post_type_archive_link('event') ?>" class="btn btn--blue">View All Events</a></p>
         </div>
       </div>
       <div class="full-width-split__two">
@@ -51,6 +55,8 @@
               'posts_per_page' => 2
             ));
 
+            // loop thorugh the posts and display them on the page
+
             while($homepagePosts->have_posts()) {
               $homepagePosts->the_post(); ?>
               <div class="event-summary">
@@ -60,7 +66,12 @@
             </a>
             <div class="event-summary__content">
               <h5 class="event-summary__title headline headline--tiny"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
-              <p><?php echo wp_trim_words(get_the_content(), 18)  ?><a href="<?php the_permalink(); ?>" class="nu gray">Read more</a></p>
+              <!-- choose between excerpt and content -->
+              <p><?php if(has_excerpt()) {
+                echo get_the_excerpt();
+              } else {
+                echo wp_trim_words(get_the_content(), 18);
+              } ?><a href="<?php the_permalink(); ?>" class="nu gray">Read more</a></p>
             </div>
           </div>
             <?php } 
@@ -71,6 +82,8 @@
         </div>
       </div>
     </div>
+
+    <!-- carousel -->
 
     <div class="hero-slider">
       <div data-glide-el="track" class="glide__track">
