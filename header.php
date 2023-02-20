@@ -15,6 +15,7 @@
         <i class="site-header__menu-trigger fa fa-bars" aria-hidden="true"></i>
         <div class="site-header__menu group">
           <nav class="main-navigation">
+            <!-- highlight links in yellow in header -->
           <ul>
               <li <?php if (
                 is_page("about-us") or
