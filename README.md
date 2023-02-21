@@ -1,6 +1,6 @@
 # fictional-university
 
-***IMPORTANT: make sure to use git in the wordpress install itself so it can keep track of things like ```mu-themes``` and ```plugins```***
+***IMPORTANT: make sure to use git in the wordpress install itself so it can keep track of things like ```wp-content``` which has folders we need outside of the custom theme like ```mu-themes``` and ```plugins```***
 
 How to get started
 - have local installed
@@ -24,6 +24,8 @@ custom fields
 
 function university_post_types() {
     register_post_type('event', array(
+        'show_in_rest' => true,
+        'supports' => array('title', 'editor', 'excerpt'),
         'rewrite' => array('slug' => 'events'),
         'has_archive' => true,
         'public' => true,
