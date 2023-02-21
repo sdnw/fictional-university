@@ -19,11 +19,12 @@
           <!-- 
             this is the code that will be used to display the 2 upcoming events
             this code will makes sure that the latest upcoming events we add will always be diplayed first
+            also this code will make sure that the events that have already passed will not be displayed
           -->
           <?php
           $today = date('Ymd');
             $homePageEvents = new WP_Query(array(
-              'posts_per_page' => -1,
+              'posts_per_page' => 2,
               'post_type' => 'event',
               'meta_key' => 'event_date',
               'orderby' => 'meta_value_num',
@@ -42,12 +43,12 @@
               $homePageEvents->the_post(); ?>
               <div class="event-summary">
             <a class="event-summary__date t-center" href="<?php the_permalink(); ?>">
-            <!-- custom field for blog posts used to display month only -->
+            <!-- custom field for upcoming events used to display month only -->
             <span class="event-summary__month"><?php
               $eventDate = new DateTime(get_field('event_date'));
               echo $eventDate->format('M');
             ;?></span>
-            <!-- custom field for blog posts used to display day only -->
+            <!-- custom field for upcoming events used to display day only -->
               <span class="event-summary__day"><?php echo $eventDate->format('d'); ?></span>
             </a>
             <div class="event-summary__content">
@@ -75,7 +76,7 @@
               'posts_per_page' => 2
             ));
 
-            // loop thorugh the posts and display them on the page
+            // loop thorugh the blog posts and display them on the page
 
             while($homepagePosts->have_posts()) {
               $homepagePosts->the_post(); ?>
