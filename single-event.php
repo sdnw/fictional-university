@@ -6,7 +6,7 @@ get_header();
     while(have_posts()) {
         the_post(); ?>
 
-         <div class="page-banner">
+    <div class="page-banner">
       <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri(
         "images/ocean.jpg"
       ); ?>);"></div>
@@ -27,8 +27,25 @@ get_header();
         </p>
       </div>
     <div class="generic-content"><?php the_content(); ?></div>
-        <?php }
 
-get_footer();
+    <?php 
+      $relatedPrograms = get_field('related_programs');
+      
+      if (get_field('related_programs')) {
+        foreach($relatedPrograms as $program) {
+          ?>
+          <hr class="section-break">
+          <h2 class="headline headline--medium">Related Program(s)</h2>
+          <ul class="link-list min-list">
+            <li><a href="<?php echo get_the_permalink($program); ?>"><?php echo get_the_title($program); ?></a></li>
+          </ul>
+          <?php
+        }
+      }
+    ?>
 
-?>
+  <?php }
+
+    get_footer();
+
+  ?>
