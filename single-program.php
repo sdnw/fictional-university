@@ -31,20 +31,12 @@ while (have_posts()) {
     <div class="generic-content"><?php the_content(); ?></div>
     <!-- custom query for upcoming events in single program page -->
     <?php
-    $today = date("Ymd");
-    $homePageEvents = new WP_Query([
-      "posts_per_page" => 2,
-      "post_type" => "event",
-      "meta_key" => "event_date",
-      "orderby" => "meta_value_num",
+    $relatedProfessors = new WP_Query([
+      "posts_per_page" => -1,
+      "post_type" => "professor",
+      "orderby" => "title",
       "order" => "ASC",
       "meta_query" => [
-        [
-          "key" => "event_date",
-          "compare" => ">=",
-          "value" => $today,
-          "type" => "numeric",
-        ],
         [
           "key" => "related_programs",
           "compare" => "LIKE",
@@ -53,16 +45,54 @@ while (have_posts()) {
         ],
       ],
     ]);
-    if ($homePageEvents->have_posts()) {
+    if ($relatedProfessors->have_posts()) {
 
       echo '<hr class="section-break">';
-      echo '<h2 class="headline headline--medium">Upcoming ' .
+      echo '<h2 class="headline headline--medium">' .
         get_the_title() .
-        " Events</h2>";
+        " Professors</h2>";
 
       // loop through the custom query for related events
-      while ($homePageEvents->have_posts()) {
-        $homePageEvents->the_post(); ?>
+      while ($relatedProfessors->have_posts()) {
+        $relatedProfessors->the_post(); ?>
+            <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
+          <?php
+      }
+      // reset the global post object (so that the rest of the page works correctly/upcoming events comes back)
+      wp_reset_postdata();
+
+      $today = date("Ymd");
+      $homePageEvents = new WP_Query([
+        "posts_per_page" => 2,
+        "post_type" => "event",
+        "meta_key" => "event_date",
+        "orderby" => "meta_value_num",
+        "order" => "ASC",
+        "meta_query" => [
+          [
+            "key" => "event_date",
+            "compare" => ">=",
+            "value" => $today,
+            "type" => "numeric",
+          ],
+          [
+            "key" => "related_programs",
+            "compare" => "LIKE",
+            // search for a value in a serialized array
+            "value" => '"' . get_the_ID() . '"',
+          ],
+        ],
+      ]);
+      if ($homePageEvents->have_posts()) {
+
+        echo '<hr class="section-break">';
+        echo '<h2 class="headline headline--medium">Upcoming ' .
+          get_the_title() .
+          " Events</h2>";
+
+        // loop through the custom query for related events
+        while ($homePageEvents->have_posts()) {
+          $homePageEvents->the_post(); ?>
               <div class="event-summary">
             <a class="event-summary__date t-center" href="<?php the_permalink(); ?>">
             <!-- custom field for upcoming events used to display month only -->
@@ -85,17 +115,19 @@ while (have_posts()) {
             </div>
           </div>
             <?php
-      }
-      wp_reset_postdata();
-      ?>
+        }
+        wp_reset_postdata();
+        ?>
     <?php
-    }
-    ?>
+      }
+      ?>
             </div>
 
     <?php
+    }
+    get_footer();
+
 }
-get_footer();
 
 
 ?>
