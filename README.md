@@ -1,5 +1,7 @@
 # fictional-university
 
+***IMPORTANT: make sure to use git in the wordpress install itself so it can keep track of things like ```mu-themes``` and ```plugins```***
+
 How to get started
 - have local installed
 - start new project to install wordpress
