@@ -1,8 +1,6 @@
 <!-- this file name is important -->
 
-<?php 
-
-  get_header(); ?>
+<?php get_header(); ?>
 
 <div class="page-banner">
       <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri(
@@ -19,10 +17,11 @@
     <div class="container container--narrow page-section">
       <ul class="link-list min-list">
       <?php
-      while(have_posts()) {
+      while (have_posts()) {
         the_post(); ?>
         <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
-      <?php }
+      <?php
+      }
       echo paginate_links();
       ?>
         </ul>
