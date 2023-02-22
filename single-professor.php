@@ -17,13 +17,23 @@ while (have_posts()) {
       </div>
     </div>
 
-
+<!-- resize the image and have the text next to it two-column style -->
     <div class="container container--narrow page-section">
-    <div class="generic-content"><?php the_content(); ?></div>
+    <div class="generic-content">
+        <div class="row group">
+            <div class="one-third">
+            <?php the_post_thumbnail("professorPortrait"); ?>
+            </div>
+            <div class="two-thirds">
+            <?php the_content(); ?>
+            </div>
+        </div>
+    </div>
 
     <?php
     $relatedPrograms = get_field("related_programs");
 
+// this is the code that will display the related programs on the single professor page
     if (get_field("related_programs")) {
       foreach ($relatedPrograms as $program) { ?>
           <hr class="section-break">

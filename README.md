@@ -2,6 +2,10 @@
 
 ***IMPORTANT: make sure to use git in the wordpress install itself so it can keep track of things like ```wp-content``` which has folders we need outside of the custom theme like ```mu-themes``` and ```plugins```***
 
+plugins installed
+- Advanced Custom Fields
+- Wordpress Importer
+
 How to get started
 - have local installed
 - start new project to install wordpress
@@ -44,3 +48,4 @@ add_action('init', 'university_post_types');
 
 ?>
 ```
+
