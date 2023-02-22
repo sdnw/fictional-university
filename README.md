@@ -1,6 +1,6 @@
 # fictional-university
 
-***IMPORTANT: make sure to use git in the wordpress install itself so it can keep track of things like ```wp-content``` which has folders we need outside of the custom theme like ```mu-themes``` and ```plugins```***
+***IMPORTANT: make sure to use git in the wordpress install itself so it can keep track of things like ```wp-content``` which has folders we need outside of the custom theme like ```mu-plugins``` and plugins from wp itself***
 
 plugins installed
 - Advanced Custom Fields
@@ -22,32 +22,69 @@ How to get started
 
 
 custom fields
-- ```mu-themes``` folder isn't tracked by git as it is outside our custom theme folder. 
-- in ```wp-content``` we need to have a folder called  ```mu-themes``` (name is required) so if our custom theme was to be swapped with something else, we would still keep our custom post-types. here is the code in case we need to make another folder the file name is ```university-plugins.php``` (name on this does not matter)
+- ```mu-plugins``` folder isn't tracked by git as it is outside our custom theme folder. 
+- in ```wp-content``` we need to have a folder called  ```mu-plugins``` (name is required) so if our custom theme was to be swapped with something else, we would still keep our custom post-types. here is the code in case we need to make another folder the file name is ```university-post-types.php``` (name on this does not matter)
 
 ```
 <?php
 
-function university_post_types() {
-    register_post_type('event', array(
-        'show_in_rest' => true,
-        'supports' => array('title', 'editor', 'excerpt'),
-        'rewrite' => array('slug' => 'events'),
-        'has_archive' => true,
-        'public' => true,
-        'show_in_rest' => true,
-        'labels' => array(
-            'name' => 'Events',
-            'add_new_item' => 'Add New Event',
-            'edit_item' => 'Edit Event',
-            'all_items' => 'All Events',
-            'singular_name' => 'Event'
-        ),
-        'menu_icon' => 'dashicons-calendar'
-    ));
+function university_post_types()
+{
+  // Event post type
+  register_post_type("event", [
+    "show_in_rest" => true,
+    "supports" => ["title", "editor", "excerpt"],
+    "rewrite" => ["slug" => "events"],
+    "has_archive" => true,
+    "public" => true,
+    "show_in_rest" => true,
+    "labels" => [
+      "name" => "Events",
+      "add_new_item" => "Add New Event",
+      "edit_item" => "Edit Event",
+      "all_items" => "All Events",
+      "singular_name" => "Event",
+    ],
+    "menu_icon" => "dashicons-calendar",
+  ]);
+
+  // Program post type
+  register_post_type("program", [
+    "show_in_rest" => true,
+    "supports" => ["title", "editor"],
+    "rewrite" => ["slug" => "programs"],
+    "has_archive" => true,
+    "public" => true,
+    "show_in_rest" => true,
+    "labels" => [
+      "name" => "Programs",
+      "add_new_item" => "Add New Program",
+      "edit_item" => "Edit Program",
+      "all_items" => "All Programs",
+      "singular_name" => "Program",
+    ],
+    "menu_icon" => "dashicons-awards",
+  ]);
+
+  // Profressor post type
+  register_post_type("professor", [
+    "show_in_rest" => true,
+    "supports" => ["title", "editor", "thumbnail"],
+    "public" => true,
+    "show_in_rest" => true,
+    "labels" => [
+      "name" => "Professors",
+      "add_new_item" => "Add New Professor",
+      "edit_item" => "Edit Professor",
+      "all_items" => "All Professors",
+      "singular_name" => "Professor",
+    ],
+    "menu_icon" => "dashicons-welcome-learn-more",
+  ]);
 }
-add_action('init', 'university_post_types');
+add_action("init", "university_post_types");
 
 ?>
+
 ```
 
