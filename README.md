@@ -5,6 +5,8 @@
 plugins installed
 - Advanced Custom Fields
 - Wordpress Importer
+- Manual Image Crop
+- Regenerative Thumbnails
 
 How to get started
 - have local installed
