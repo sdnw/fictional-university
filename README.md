@@ -1,6 +1,6 @@
 # fictional-university
 
-***IMPORTANT: make sure to use git in the wordpress install itself so it can keep track of things like ```wp-content``` which has folders we need outside of the custom theme like ```mu-plugins``` and plugins from wp itself***
+***IMPORTANT: make sure to use git in the wordpress install itself so it can keep track of things like ```wp-content``` which has folders we need outside of the custom theme like ```mu-plugins``` and plugins from wp itself. Also make sure to update the .xml file before taking this home too***
 
 plugins installed
 - Advanced Custom Fields
