@@ -88,3 +88,13 @@ add_action("init", "university_post_types");
 
 ```
 
+If you get lost and don't know which template file is controlling the front end use this code in ```functions.php``` to print the working directory in the header:
+```
+add_action('wp_head', 'show_template');
+function show_template() {
+  global $template;
+  print_r($template);
+}
+```
+
+
