@@ -18,7 +18,7 @@ How to get started
     - go to tools > import > click WordPress (install if needed) > click "Run Importer" > select .xml file to import
 - to export the pages and posts
     - go to tools > export > click All content > Download Export File > add to root of theme file
-- you should be ready to after that!
+- you should be ready to after that.
 
 
 custom fields
