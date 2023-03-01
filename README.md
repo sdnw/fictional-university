@@ -1,29 +1,31 @@
 # fictional-university
 
-***IMPORTANT: make sure to use git in the wordpress install itself so it can keep track of things like ```wp-content``` which has folders we need outside of the custom theme like ```mu-plugins``` and plugins from wp itself. Also make sure to update the .xml file before taking this home too***
+**_IMPORTANT: make sure to use git in the wordpress install itself so it can keep track of things like `wp-content` which has folders we need outside of the custom theme like `mu-plugins` and plugins from wp itself. Also make sure to update the .xml file before taking this home too_**
 
 plugins installed
+
 - Advanced Custom Fields
 - Wordpress Importer
 - Manual Image Crop
 - Regenerative Thumbnails
 
 How to get started
+
 - have local installed
 - start new project to install wordpress
-- when you pull this custom theme, add it to ```wp-content``` folder along with other themes
+- when you pull this custom theme, add it to `wp-content` folder along with other themes
 - in WP Admin
-    - go to appearance > themes, this custom theme should be in there
+  - go to appearance > themes, this custom theme should be in there
 - to import the pages and posts
-    - go to tools > import > click WordPress (install if needed) > click "Run Importer" > select .xml file to import
+  - go to tools > import > click WordPress (install if needed) > click "Run Importer" > select .xml file to import
 - to export the pages and posts
-    - go to tools > export > click All content > Download Export File > add to root of theme file
+  - go to tools > export > click All content > Download Export File > add to root of theme file
 - you should be ready to after that.
 
-
 custom fields
-- ```mu-plugins``` folder isn't tracked by git as it is outside our custom theme folder. 
-- in ```wp-content``` we need to have a folder called  ```mu-plugins``` (name is required) so if our custom theme was to be swapped with something else, we would still keep our custom post-types. here is the code in case we need to make another folder the file name is ```university-post-types.php``` (name on this does not matter)
+
+- `mu-plugins` folder isn't tracked by git as it is outside our custom theme folder.
+- in `wp-content` we need to have a folder called `mu-plugins` (name is required) so if our custom theme was to be swapped with something else, we would still keep our custom post-types. here is the code in case we need to make another folder the file name is `university-post-types.php` (name on this doesn't matter)
 
 ```
 <?php
@@ -88,7 +90,8 @@ add_action("init", "university_post_types");
 
 ```
 
-If you get lost and don't know which template file is controlling the front end use this code in ```functions.php``` to print the working directory in the header:
+If you get lost and don't know which template file is controlling the front end use this code in `functions.php` to print the working directory in the header:
+
 ```
 add_action('wp_head', 'show_template');
 function show_template() {
@@ -96,5 +99,3 @@ function show_template() {
   print_r($template);
 }
 ```
-
-
