@@ -32,6 +32,24 @@ custom fields
 
 function university_post_types()
 {
+    // Campus post type
+    register_post_type("campus", [
+      "show_in_rest" => true,
+      "supports" => ["title", "editor", "excerpt"],
+      "rewrite" => ["slug" => "campuses"],
+      "has_archive" => true,
+      "public" => true,
+      "show_in_rest" => true,
+      "labels" => [
+        "name" => "Campuses",
+        "add_new_item" => "Add New Campus",
+        "edit_item" => "Edit Campus",
+        "all_items" => "All Campuses",
+        "singular_name" => "Campus",
+      ],
+      "menu_icon" => "dashicons-location-alt",
+    ]);
+
   // Event post type
   register_post_type("event", [
     "show_in_rest" => true,
