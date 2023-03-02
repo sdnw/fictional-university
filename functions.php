@@ -110,9 +110,16 @@ function university_adjust_queries($query)
 
 add_action("pre_get_posts", "university_adjust_queries");
 
-add_action("wp_head", "show_template");
-function show_template()
-{
-  global $template;
-  print_r($template);
+// get javascript search working
+function my_theme_enqueue_scripts() {
+  wp_enqueue_script( 'search', get_template_directory_uri() . '/js/search.js', array( 'jquery' ), '1.0', true );
 }
+
+add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_scripts' );
+
+// add_action("wp_head", "show_template");
+// function show_template()
+// {
+//   global $template;
+//   print_r($template);
+// }
