@@ -1,22 +1,28 @@
 <?php
 // create reusable function for page banner in page/single-professor
-function pageBanner($args = NULL) {
-  
-    if (!isset($args['title'])) {
-      $args['title'] = get_the_title();
+function pageBanner($args = null)
+{
+  if (!isset($args["title"])) {
+    $args["title"] = get_the_title();
+  }
+
+  if (!isset($args["subtitle"])) {
+    $args["subtitle"] = get_field("page_banner_subtitle");
+  }
+
+  if (!isset($args["photo"])) {
+    if (
+      get_field("page_banner_background_image") and
+      !is_archive() and
+      !is_home()
+    ) {
+      $args["photo"] = get_field("page_banner_background_image")["sizes"][
+        "pageBanner"
+      ];
+    } else {
+      $args["photo"] = get_theme_file_uri("/images/ocean.jpg");
     }
-   
-    if (!isset($args['subtitle'])) {
-      $args['subtitle'] = get_field('page_banner_subtitle');
-    }
-   
-    if (!isset($args['photo'])) {
-      if (get_field('page_banner_background_image') AND !is_archive() AND !is_home() ) {
-        $args['photo'] = get_field('page_banner_background_image')['sizes']['pageBanner'];
-      } else {
-        $args['photo'] = get_theme_file_uri('/images/ocean.jpg');
-      }
-    }
+  }
   ?>
     <div class="page-banner">
       <div class="page-banner__bg-image" style="background-image: url(<?php echo $args[
@@ -104,4 +110,9 @@ function university_adjust_queries($query)
 
 add_action("pre_get_posts", "university_adjust_queries");
 
-
+add_action("wp_head", "show_template");
+function show_template()
+{
+  global $template;
+  print_r($template);
+}

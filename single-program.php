@@ -21,7 +21,7 @@ while (have_posts()) {
     <div class="generic-content"><?php the_content(); ?></div>
 
     <!-- custom query for related professors in single program page -->
-    <?php
+   <?php
     $relatedProfessors = new WP_Query([
       "posts_per_page" => -1,
       "post_type" => "professor",
@@ -62,6 +62,7 @@ while (have_posts()) {
       wp_reset_postdata();
 
       $today = date("Ymd");
+      
       $homePageEvents = new WP_Query([
         "posts_per_page" => 2,
         "post_type" => "event",
@@ -83,20 +84,21 @@ while (have_posts()) {
           ],
         ],
       ]);
-      if ($homePageEvents->have_posts()) {
 
+      if ($homePageEvents->have_posts()) {
         echo '<hr class="section-break">';
         echo '<h2 class="headline headline--medium">Upcoming ' .
-          get_the_title() .
-          " Events</h2>";
-
+        get_the_title() .
+        " Events</h2>";
         // loop through the custom query for related events
         while ($homePageEvents->have_posts()) {
           $homePageEvents->the_post();
           get_template_part("template-parts/event");
         }
       }
+      
         wp_reset_postdata();
+        
         $relatedCampuses = get_field("related_campus");
           if($relatedCampuses) {
             echo '<hr class="section-break">';
