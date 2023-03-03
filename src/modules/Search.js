@@ -38,15 +38,28 @@ class Search {
         this.isSpinnerVisible = false;
       }
     }
-
     this.previousValue = this.searchField.val();
   }
   getResults() {
-    this.resultsDiv.html("Imagine results here...");
-    this.isSpinnerVisible = false;
+    $.getJSON(
+      "http://fictional-university.local/wp-json/wp/v2/posts?search=" +
+        this.searchField.val(),
+      (posts) => {
+        this.resultsDiv.html(`
+        <h2 class="search-overlay__section-title">General Information</h2>
+        <ul class="link-list min-list">
+          ${posts.map((item) => `<li><a href=${item.link}>${item.title.rendered}</a></li>`).join("")}
+        </ul>
+        `);
+      }
+    );
   }
   keyPressDispatcher(e) {
-    if (e.keyCode == 83 && !this.isOverlayOpen && !$("input, textarea").is(":focus")) {
+    if (
+      e.keyCode == 83 &&
+      !this.isOverlayOpen &&
+      !$("input, textarea").is(":focus")
+    ) {
       this.openOverlay();
     }
     if (e.keyCode == 27 && this.isOverlayOpen) {
@@ -58,7 +71,6 @@ class Search {
     $("body").addClass("body-no-scroll");
     this.isOverlayOpen = true;
   }
-
   closeOverlay() {
     this.searchOverlay.removeClass("search-overlay--active");
     $("body").removeClass("body-no-scroll");
