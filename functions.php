@@ -63,6 +63,10 @@ function university_files()
     "university_extra_styles",
     get_theme_file_uri("/build/index.css")
   );
+  wp_localize_script("main-university-js", "universityData", [
+    "root_url" => get_site_url(),
+    
+  ]);
 }
 
 add_action("wp_enqueue_scripts", "university_files");
@@ -111,11 +115,18 @@ function university_adjust_queries($query)
 add_action("pre_get_posts", "university_adjust_queries");
 
 // get javascript search working
-function my_theme_enqueue_scripts() {
-  wp_enqueue_script( 'search', get_template_directory_uri() . '/js/search.js', array( 'jquery' ), '1.0', true );
+function my_theme_enqueue_scripts()
+{
+  wp_enqueue_script(
+    "search",
+    get_template_directory_uri() . "/js/search.js",
+    ["jquery"],
+    "1.0",
+    true
+  );
 }
 
-add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_scripts' );
+add_action("wp_enqueue_scripts", "my_theme_enqueue_scripts");
 
 // add_action("wp_head", "show_template");
 // function show_template()
