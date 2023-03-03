@@ -53,9 +53,10 @@ class Search {
           "/wp-json/wp/v2/pages?search=" +
           this.searchField.val()
       )
-    ).then((posts, pages) => {
-      const combinedResults = posts[0].concat(pages[0]);
-      this.resultsDiv.html(`
+    ).then(
+      (posts, pages) => {
+        const combinedResults = posts[0].concat(pages[0]);
+        this.resultsDiv.html(`
         <h2 class="search-overlay__section-title">General Information</h2>
         ${
           combinedResults.length
@@ -65,15 +66,17 @@ class Search {
           ${combinedResults
             .map(
               (item) =>
-                `<li><a href=${item.link}>${item.title.rendered}</a></li>`
+                `<li><a href=${item.link}>${item.title.rendered}</a> ${item.type == 'post' ? `by ${item.authorName}`: ``}</li>`
             )
             .join("")}
         ${combinedResults.length ? "</ul>" : ""}
         `);
-      this.isSpinnerVisible = false;
-    }, () => {
-      this.resultsDiv.html("<p>Unexpected error; please try again.</p>");
-    });
+        this.isSpinnerVisible = false;
+      },
+      () => {
+        this.resultsDiv.html("<p>Unexpected error; please try again.</p>");
+      }
+    );
   }
   keyPressDispatcher(e) {
     if (
