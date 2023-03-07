@@ -142,6 +142,9 @@ function universitySearchResults($data)
     $results["events"] = array_values(
       array_unique($results["events"], SORT_REGULAR)
     );
+    $results["campuses"] = array_values(
+      array_unique($results["campuses"], SORT_REGULAR)
+    );
   }
 
   return $results;
