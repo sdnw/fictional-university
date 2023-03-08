@@ -137,6 +137,28 @@ function my_theme_enqueue_scripts()
 
 add_action("wp_enqueue_scripts", "my_theme_enqueue_scripts");
 
+// redirect subscriber accounts out of admin and onto homepage
+add_action("admin_init", "redirectSubsToFrontend");
+
+function redirectSubsToFrontend()
+{
+  $ourCurrentUser = wp_get_current_user();
+  if (count($ourCurrentUser->roles) == 1 AND
+    $ourCurrentUser->roles[0] == "subscriber") {
+    wp_redirect(site_url("/"));
+    exit;
+  }
+}
+
+add_action('wp_loaded', 'noSubsAdminBar');
+
+function noSubsAdminBar() {
+  $ourCurrentUser = wp_get_current_user();
+
+  if (count($ourCurrentUser->roles) == 1 AND $ourCurrentUser->roles[0] == 'subscriber') {
+    show_admin_bar(false);
+  }
+}
 // add_action("wp_head", "show_template");
 // function show_template()
 // {
