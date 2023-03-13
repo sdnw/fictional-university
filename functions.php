@@ -188,6 +188,16 @@ function ourLoginTitle() {
   return get_bloginfo('name');
 }
 
+// Force note posts to be private
+add_filter('wp_insert_post_data', 'makeNotePrivate', 10, 2);
+
+function makeNotePrivate($data) {
+  if($data['post_type'] == 'note' AND $data['post_status'] != 'trash') {
+    $data['post_status'] = 'private';
+  }
+  return $data;
+}
+
 // add_action("wp_head", "show_template");
 // function show_template()
 // {
