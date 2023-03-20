@@ -22,7 +22,7 @@ How to get started
   - go to tools > export > click All content > Download Export File > add to root of theme file
 - you should be ready to after that
 
-custom fields
+Custom Fields
 
 - `mu-plugins` folder isn't tracked by git as it is outside our custom theme folder.
 - in `wp-content` we need to have a folder called `mu-plugins` (name is required) so if our custom theme was to be swapped with something else, we would still keep our custom post-types. here is the code in case we need to make another folder the file name is `university-post-types.php` (name on this doesn't matter)
