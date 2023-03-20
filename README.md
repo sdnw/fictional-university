@@ -30,8 +30,6 @@ Custom Fields
 ```
 <?php
 
-<?php
-
 function university_post_types()
 {
   // Campus post type
@@ -107,7 +105,7 @@ function university_post_types()
     ],
     "menu_icon" => "dashicons-welcome-learn-more",
   ]);
-  
+
   // Note Post Type
   register_post_type('note', array(
     // 'capability_type' => 'note',
